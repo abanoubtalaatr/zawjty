@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,11 +12,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-//            $table->foreignId('color_eye_id')->nullable();
-            $table->integer('number_of_children')->nullable();
-            $table->foreignId('color_eye_id')->nullable();
-
+        Schema::create('stories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->text('story');
+            $table->date('published_at');
+            $table->timestamps();
         });
     }
 
@@ -28,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('stories');
     }
 };

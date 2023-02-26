@@ -33,7 +33,7 @@
                         </div>
                         <details open="" class="text-right">
                             <summary>نبذه عنه</summary>
-                            <a href="user.html" class="btn global-btn-1 w-100 mt-2 mb-2 text-center">شاهد الصفحه</a>
+                            <a href="{{route('user.details', ['user' => $user->id])}}" class="btn global-btn-1 w-100 mt-2 mb-2 text-center">شاهد الصفحه</a>
                             <p>
                                 <span class="details-sp"> الاسم : </span> {{$user->name}}
                             </p>

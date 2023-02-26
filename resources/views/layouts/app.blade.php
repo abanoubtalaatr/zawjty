@@ -177,18 +177,22 @@
                 اعضاء زارو صفحتي
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="ban.html">
-                <i class="fas ml-2 fa-ban"></i>
-                الأعضاء المحجوبين
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">
-                <i class="fas ml-2 fa-dove"></i>
-                سجل قصتي الناجحة
-            </a>
-        </li>
+        @if(auth()->check())
+            <li class="nav-item">
+                <a class="nav-link" href="/user/blocked-user">
+                    <i class="fas ml-2 fa-ban"></i>
+                    الأعضاء المحجوبين
+                </a>
+            </li>
+        @endif
+        @if(auth()->check())
+            <li class="nav-item">
+                <a class="nav-link" href="/user/stories">
+                    <i class="fas ml-2 fa-dove"></i>
+                    سجل قصتي الناجحة
+                </a>
+            </li>
+        @endif
     </ul>
 </nav>
 @yield('content')
@@ -231,7 +235,7 @@
                     <li><a href="aboutzawjaty.html">من نحن ؟</a></li>
                     <li><a href="/user/register">دخول / تسجيل</a></li>
                     <li><a href="/user/search">البحث المتقدم</a></li>
-                    <li><a href="storylove.html">قصص ناجحة</a></li>
+                    <li><a href="/user/stories">قصص ناجحة</a></li>
                     <li><a href="articles.html">المقالات</a></li>
                 </ul>
             </div>

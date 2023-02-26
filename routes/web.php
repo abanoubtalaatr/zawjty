@@ -24,8 +24,10 @@ use App\Http\Controllers\Dashboard\UpcommingCourseController;
 use App\Http\Controllers\Dashboard\UpcommingExamController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Site\AuthController;
+use App\Http\Controllers\Site\BlockUserController;
 use App\Http\Controllers\Site\ContactUsController;
 use App\Http\Controllers\Site\HomeController;
+use App\Http\Controllers\Site\StoryController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -70,19 +72,32 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/result/search', [HomeController::class, 'resultSearch'])->name('user.result_of_search');
 
     //type of married
-    Route::get('/new-man', [HomeController::class,'showMan'])->name('user.new_man');
-    Route::get('/new-woman', [HomeController::class,'showWoman'])->name('user.new_woman');
-    Route::get('/polygamy-woman', [HomeController::class,'showWomanWantMarriedMulti'])->name('user.woman_multi');
-    Route::get('/msyar-woman', [HomeController::class,'showWomanWantMarriedMsyar'])->name('user.woman_msyar');
-    Route::get('/normal', [HomeController::class,'showNormalMarried'])->name('user.normal_married');
+    Route::get('/new-man', [HomeController::class, 'showMan'])->name('user.new_man');
+    Route::get('/new-woman', [HomeController::class, 'showWoman'])->name('user.new_woman');
+    Route::get('/polygamy-woman', [HomeController::class, 'showWomanWantMarriedMulti'])->name('user.woman_multi');
+    Route::get('/msyar-woman', [HomeController::class, 'showWomanWantMarriedMsyar'])->name('user.woman_msyar');
+    Route::get('/normal', [HomeController::class, 'showNormalMarried'])->name('user.normal_married');
+
+    //user info
+    Route::get('/{user}/details', [HomeController::class, 'userDetails'])->name('user.details');
+
+    //stories
+    Route::get('/stories', [StoryController::class, 'index']);
+    Route::get('/story', [StoryController::class, 'show'])->name('user.story.show');
+    Route::post('/story', [StoryController::class, 'store'])->name('user.story.store');
 });
 
+//ordinary user
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('user.logout');
     Route::get('/profile', [AuthController::class, 'showProfile'])->name('user.show_profile');
     Route::post('/profile/{user}/update', [AuthController::class, 'updateProfile'])->name('user.update_profile');
+    Route::get('blocked-user', [BlockUserController::class, 'index'])->name('user.blocked');
+    Route::post('unblocked/{user}', [BlockUserController::class, 'unBlockedUser'])->name('user.unblocked');
+    Route::post('blocked/{user}', [BlockUserController::class, 'block'])->name('user.blocked_post');
 });
 
+//user blocker, who_blocker who_blocked
 //contacts us
 Route::get('/contact-us', [\App\Http\Controllers\HomeController::class, 'contactUs'])->name('contactUs');
 Route::post('contact-us', [ContactUsController::class, 'store'])->name('contact_us.store');
@@ -108,8 +123,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
     Route::put('profile', [ProfileController::class, 'update'])
         ->name('profile.update');
 
-    Route::post('delete/image', [CourseController::class, 'deleteImage'])
-        ->name('delete.course.image');
+//    Route::post('delete/image', [CourseController::class, 'deleteImage'])
+//        ->name('delete.course.image');
 
-    Route::resource('executives', ExecutiveController::class);
+//    Route::resource('executives', ExecutiveController::class);
 });

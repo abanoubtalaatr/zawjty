@@ -159,7 +159,6 @@ class HomeController extends Controller
         $query->where('user_type', 'user');
         $query->where('gender', 'ذكر');
         $users = $query->with(['country', 'age'])->get();
-// dd($users[4]['age']);
         return view('site.new_man', compact('users'));
     }
 
@@ -175,7 +174,6 @@ class HomeController extends Controller
 
     public function showWomanWantMarriedMsyar()
     {
-//        dd('fdslkfdslk');
         $query = User::query();
         $query->where('user_type', 'user');
         $query->where('gender', 'انثي')->where('marriage_type_id', 2);
@@ -203,5 +201,11 @@ class HomeController extends Controller
         $users = $query->with('country', 'age')->get();
 
         return view('site.normal_married', compact('users'));
+    }
+
+    public function userDetails(User $user)
+    {
+        $similarUsers = User::where('user_type', 'user')->where('gender', $user->gender)->get();
+        return view('site.user_details', compact('user', 'similarUsers'));
     }
 }

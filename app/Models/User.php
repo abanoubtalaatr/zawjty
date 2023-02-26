@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -149,6 +150,7 @@ class User extends Authenticatable
         return $this->belongsTo(ColorSkin::class, 'color_skin_id');
     }
 
+
     public function marriageType()
     {
         return $this->belongsTo(MarriageType::class, 'marriage_type_id');
@@ -159,7 +161,7 @@ class User extends Authenticatable
         return $this->belongsTo(HealthStatus::class, 'health_status_id');
     }
 
-    public function MaritalStatus()
+    public function maritalStatus()
     {
         return $this->belongsTo(MaritalStatus::class, 'marital_status_id');
     }
@@ -173,4 +175,6 @@ class User extends Authenticatable
     {
         return $this->belongsTo(HavingChildren::class, 'having_children_id');
     }
+
+
 }
