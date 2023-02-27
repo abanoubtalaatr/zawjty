@@ -95,6 +95,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::get('blocked-user', [BlockUserController::class, 'index'])->name('user.blocked');
     Route::post('unblocked/{user}', [BlockUserController::class, 'unBlockedUser'])->name('user.unblocked');
     Route::post('blocked/{user}', [BlockUserController::class, 'block'])->name('user.blocked_post');
+    Route::get('likes-me', [\App\Http\Controllers\Site\UserLikeController::class,'index'])->name('user.likes_me');
+    Route::get('i-likes',[\App\Http\Controllers\Site\UserLikeController::class,'ILikes'])->name('user.i_likes');
+    Route::post('like/{user}', [\App\Http\Controllers\Site\UserLikeController::class,'like'])->name('user.like');
+    Route::post('dislike/{user}',[\App\Http\Controllers\Site\UserLikeController::class,'dislike'])->name('user.dislike');
 });
 
 //user blocker, who_blocker who_blocked

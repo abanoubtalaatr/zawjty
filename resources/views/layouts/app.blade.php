@@ -160,13 +160,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="favusers.html">
+            <a class="nav-link" href="{{route('user.i_likes')}}">
                 <i class="fas ml-2 fa-heart"></i>
                 الأعضاء المعجب بهم
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="userslikesme.html">
+            <a class="nav-link" href="/user/likes-me">
                 <i class="fas ml-2 fa-grin-hearts"></i>
                 الأعضاء المعجبين بصفحتي
             </a>
