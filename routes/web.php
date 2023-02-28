@@ -99,6 +99,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::get('i-likes',[\App\Http\Controllers\Site\UserLikeController::class,'ILikes'])->name('user.i_likes');
     Route::post('like/{user}', [\App\Http\Controllers\Site\UserLikeController::class,'like'])->name('user.like');
     Route::post('dislike/{user}',[\App\Http\Controllers\Site\UserLikeController::class,'dislike'])->name('user.dislike');
+    Route::get('visit-my-profile', [\App\Http\Controllers\Site\VisitController::class,'index'])->name('user.visit_my_profile');
 });
 
 //user blocker, who_blocker who_blocked

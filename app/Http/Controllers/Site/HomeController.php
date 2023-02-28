@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -206,6 +207,17 @@ class HomeController extends Controller
     public function userDetails(User $user)
     {
         $similarUsers = User::where('user_type', 'user')->where('gender', $user->gender)->get();
+
+        // if any person that not equal me register that i visit his profile
+        if (auth()->check()) {
+            if (auth()->id() != $user->id) {
+                Visit::create([
+                    'page_owner_id' => $user->id,
+                    'visitor_id' => auth()->id(),
+                ]);
+            }
+        }
+
         return view('site.user_details', compact('user', 'similarUsers'));
     }
 }

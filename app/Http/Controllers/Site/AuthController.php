@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         $data = $request->except('password');
         $data['password'] = bcrypt($request->password);
-        
+//        dd($data);
         User::create($data);
 
         return view('site.login');
@@ -56,7 +56,8 @@ class AuthController extends Controller
 
     public function updateProfile(User $user, UpdateProfileRequest $request)
     {
+
         $user->update($request->all());
-        return $this->showProfile();
+        return back();
     }
 }

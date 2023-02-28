@@ -61,10 +61,11 @@
                 <a class="dropdown-item" href="">تسجيل الخروج</a>
             </div>
         </div>
-
-        <button class="btn-slid navbar-brand" type="button">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        @if(auth()->check())
+            <button class="btn-slid navbar-brand" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        @endif
     </div>
 
     <div class="collapse navbar-collapse" id="navbarSupsportedContent">
@@ -131,6 +132,7 @@
     </div>
 </nav>
 {{--sidebar--}}
+
 <nav class="slidbar-menu slider-navs">
     <ul>
         @if(auth()->user() && auth()->user()->user_type=='user')
@@ -146,46 +148,47 @@
                     الصورة الشخصية
                 </a>
             </li>
-        @endif
-        <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0)">
-                <i class="fas ml-2 fa-share-alt"></i>
-                وسائل التواصل خارج الموقع
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="upgrade.html">
-                <i class="fas ml-2 fa-money-check-alt"></i>
-                ترقية عضويتي
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{route('user.i_likes')}}">
-                <i class="fas ml-2 fa-heart"></i>
-                الأعضاء المعجب بهم
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/user/likes-me">
-                <i class="fas ml-2 fa-grin-hearts"></i>
-                الأعضاء المعجبين بصفحتي
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="usersvisitme.html">
-                <i class="fas ml-2 fa-eye"></i>
-                اعضاء زارو صفحتي
-            </a>
-        </li>
-        @if(auth()->check())
+
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">
+                    <i class="fas ml-2 fa-share-alt"></i>
+                    وسائل التواصل خارج الموقع
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="upgrade.html">
+                    <i class="fas ml-2 fa-money-check-alt"></i>
+                    ترقية عضويتي
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('user.i_likes')}}">
+                    <i class="fas ml-2 fa-heart"></i>
+                    الأعضاء المعجب بهم
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/user/likes-me">
+                    <i class="fas ml-2 fa-grin-hearts"></i>
+                    الأعضاء المعجبين بصفحتي
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('user.visit_my_profile')}}">
+                    <i class="fas ml-2 fa-eye"></i>
+                    اعضاء زارو صفحتي
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="/user/blocked-user">
                     <i class="fas ml-2 fa-ban"></i>
                     الأعضاء المحجوبين
                 </a>
             </li>
-        @endif
-        @if(auth()->check())
+
             <li class="nav-item">
                 <a class="nav-link" href="/user/stories">
                     <i class="fas ml-2 fa-dove"></i>
@@ -195,6 +198,7 @@
         @endif
     </ul>
 </nav>
+
 @yield('content')
 <div class="container-fluid">
     <div class="row row-cols-2 row-cols-md-4 border-top border-bottom footer">

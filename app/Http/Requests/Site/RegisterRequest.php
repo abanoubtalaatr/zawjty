@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required',' string', 'min:3'],
+            'name' => ['required',' string', 'min:3','max:6'],
             'email' => ['required', 'email', 'unique:users,email'],
             'birth_day'  => ['required', 'date'],
             'gender' => ['required', Rule::in('ذكر', 'انثي')],

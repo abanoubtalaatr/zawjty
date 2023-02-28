@@ -66,22 +66,26 @@
                                     <button class="btn global-btn-1">
                                         <i class="fas fa-envelope"></i>
                                     </button>
-                                    @if(\App\Models\Like::where('sender_id', auth()->user()->id)->where('receiver_id', $user->id)->first())
-                                        <form class="d-inline" action="{{route('user.dislike', $user->id)}}" method="post">
-                                            @method('post')
-                                            @csrf
-                                            <button class="btn global-btn-2" type="submit">
-                                                <i class="fas fa-heart-broken"></i>
-                                            </button>
-                                        </form>
-                                    @else
-                                        <form class="d-inline" action="{{route('user.like', $user->id)}}" method="post">
-                                            @method('post')
-                                            @csrf
-                                            <button class="btn global-btn-2" type="submit">
-                                                <i class="fas fa-heart text-white"></i>
-                                            </button>
-                                        </form>
+                                    @if(auth()->check())
+                                        @if(\App\Models\Like::where('sender_id', auth()->user()->id)->where('receiver_id', $user->id)->first())
+                                            <form class="d-inline" action="{{route('user.dislike', $user->id)}}"
+                                                  method="post">
+                                                @method('post')
+                                                @csrf
+                                                <button class="btn global-btn-2" type="submit">
+                                                    <i class="fas fa-heart-broken"></i>
+                                                </button>
+                                            </form>
+                                        @else
+                                            <form class="d-inline" action="{{route('user.like', $user->id)}}"
+                                                  method="post">
+                                                @method('post')
+                                                @csrf
+                                                <button class="btn global-btn-2" type="submit">
+                                                    <i class="fas fa-heart text-white"></i>
+                                                </button>
+                                            </form>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

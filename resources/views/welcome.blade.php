@@ -122,7 +122,7 @@
                 @foreach($mostPopular as $index => $popular)
                     <div class="thumbnail">
                         <div class="col mb-4 text-center">
-                            <a href="user/details">
+                            <a href="user/{{$popular->id}}/details">
                                 <div class="card px-4" style="border-radius: 5px">
                                     <div class="card-body">
                                         <div>
@@ -174,7 +174,7 @@
                 </a>
             </div>
             <div class="col mb-1 mt-1">
-                <a href="newmen.html">
+                <a href="{{route('user.new_man')}}">
                     <div class="card">
                         <div class="text-center">
                             <img src="{{asset('imgs/newus.svg')}}" class="card-img-top w-75" alt="newusers">
@@ -186,7 +186,7 @@
                 </a>
             </div>
             <div class="col mb-1 mt-1">
-                <a href="signin.html">
+                <a href="{{route('user.new_woman')}}">
                     <div class="card">
                         <div class="text-center">
                             <img src="{{asset('imgs/beoneofus.svg')}}" class="card-img-top w-75" alt="beoneofus">
@@ -213,7 +213,7 @@
                 @foreach($newUsers as $index=> $user)
                     <div class="thumbnail">
                         <div class="col mb-4 text-center">
-                            <a href="user.html">
+                            <a href="/admin/{{$user->id}}/details">
                                 <div class="card px-4" style="border-radius: 5px">
                                     <div class="card-body">
                                         <div>
