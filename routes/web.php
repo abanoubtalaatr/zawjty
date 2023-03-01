@@ -100,6 +100,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::post('like/{user}', [\App\Http\Controllers\Site\UserLikeController::class,'like'])->name('user.like');
     Route::post('dislike/{user}',[\App\Http\Controllers\Site\UserLikeController::class,'dislike'])->name('user.dislike');
     Route::get('visit-my-profile', [\App\Http\Controllers\Site\VisitController::class,'index'])->name('user.visit_my_profile');
+    Route::get('image', [ProfileController::class,'image'])->name('user.image');
+    Route::post('save-image', [ProfileController::class,'imagePost'])->name('user.save_image');
 });
 
 //user blocker, who_blocker who_blocked

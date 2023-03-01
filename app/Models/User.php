@@ -52,7 +52,7 @@ class User extends Authenticatable
         'marriage_type_id',
         'marital_status_id',
         'having_children_id',
-
+        'image',
     ];
 
     /**

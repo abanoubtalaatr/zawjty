@@ -143,7 +143,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
+                <a class="nav-link" href="{{route('user.image')}}">
                     <i class="fas ml-2 fa-camera"></i>
                     الصورة الشخصية
                 </a>
