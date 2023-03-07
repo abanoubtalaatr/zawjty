@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}">
 
@@ -23,6 +24,8 @@
             font-family: 'Nunito', sans-serif;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 </head>
 
 <body class="antialiased" style="direction: rtl">
@@ -46,17 +49,17 @@
 </div> --}}
 {{--navbar --}}
 <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="index.html"> زوجتي </a>
+    <a class="navbar-brand" href="/"> زوجتي </a>
     <div style="display: flex; justify-content: space-between">
         <div class="dropdown navbar-toggler ml-5">
             <a class="dropdown-toggle navbar-brand" data-toggle="dropdown">
                 <i class="fas fa-user-circle"></i>
             </a>
             <div class="dropdown-menu text-right">
-                <a class="dropdown-item" href="">الرسائل</a>
+                <a class="dropdown-item" href="{{route('chats.index')}}">الرسائل</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
-                   href="javascript:void(0)">الاشعارات</a>
+                   href="">الاشعارات</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="">تسجيل الخروج</a>
             </div>
@@ -87,7 +90,7 @@
                     <i class="fas fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu text-right">
-                    <a class="dropdown-item" href="">الرسائل</a>
+                    <a class="dropdown-item" href="{{route('chats.index')}}">الرسائل</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
                        href="javascript:void(0)">الاشعارات</a>

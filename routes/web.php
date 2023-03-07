@@ -25,6 +25,7 @@ use App\Http\Controllers\Dashboard\UpcommingExamController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\Site\AuthController;
 use App\Http\Controllers\Site\BlockUserController;
+use App\Http\Controllers\Site\ChatController;
 use App\Http\Controllers\Site\ContactUsController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\StoryController;
@@ -95,13 +96,16 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::get('blocked-user', [BlockUserController::class, 'index'])->name('user.blocked');
     Route::post('unblocked/{user}', [BlockUserController::class, 'unBlockedUser'])->name('user.unblocked');
     Route::post('blocked/{user}', [BlockUserController::class, 'block'])->name('user.blocked_post');
-    Route::get('likes-me', [\App\Http\Controllers\Site\UserLikeController::class,'index'])->name('user.likes_me');
-    Route::get('i-likes',[\App\Http\Controllers\Site\UserLikeController::class,'ILikes'])->name('user.i_likes');
-    Route::post('like/{user}', [\App\Http\Controllers\Site\UserLikeController::class,'like'])->name('user.like');
-    Route::post('dislike/{user}',[\App\Http\Controllers\Site\UserLikeController::class,'dislike'])->name('user.dislike');
-    Route::get('visit-my-profile', [\App\Http\Controllers\Site\VisitController::class,'index'])->name('user.visit_my_profile');
-    Route::get('image', [ProfileController::class,'image'])->name('user.image');
-    Route::post('save-image', [ProfileController::class,'imagePost'])->name('user.save_image');
+    Route::get('likes-me', [\App\Http\Controllers\Site\UserLikeController::class, 'index'])->name('user.likes_me');
+    Route::get('i-likes', [\App\Http\Controllers\Site\UserLikeController::class, 'ILikes'])->name('user.i_likes');
+    Route::post('like/{user}', [\App\Http\Controllers\Site\UserLikeController::class, 'like'])->name('user.like');
+    Route::post('dislike/{user}', [\App\Http\Controllers\Site\UserLikeController::class, 'dislike'])->name('user.dislike');
+    Route::get('visit-my-profile', [\App\Http\Controllers\Site\VisitController::class, 'index'])->name('user.visit_my_profile');
+    Route::get('image', [ProfileController::class, 'image'])->name('user.image');
+    Route::post('save-image', [ProfileController::class, 'imagePost'])->name('user.save_image');
+    Route::resource('chats', ChatController::class);
+
+    Route::get('/{chat}/messages', [ChatController::class, 'messages'])->name('chat_messages');
 });
 
 //user blocker, who_blocker who_blocked

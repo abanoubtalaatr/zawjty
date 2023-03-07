@@ -74,6 +74,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // that i send it
+    public function senderChats()
+    {
+        return $this->hasMany(Chat::class,'sender_id');
+    }
+
+    //that i receiver it
+    public function receiverChats()
+    {
+        return $this->hasMany(Chat::class,'receiver_id');
+    }
 
     public function age()
     {
