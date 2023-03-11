@@ -102,7 +102,7 @@
                     للزواج فقط ولا مجال للتعارف أو للصداقة أو غيرها فسياسة الموقع قائمة
                     على تعاليم الدين الإسلامي
                 </p>
-                <a href="signin.html" class="btn global-btn-3 btn-md">
+                <a href="{{route('user.packages')}}" class="btn global-btn-3 btn-md">
                     إشترك الان
                     <i class="fas fa-long-arrow-alt-left"></i>
                 </a>

@@ -85,6 +85,14 @@
                         @can('role-list')
                             <li><a class="nav-link" href="{{ route('roles.index') }}"> الصلاحيات والادوار</a></li>
                         @endcan
+                        @can('package-list')
+                            <li><a class="nav-link" href="{{ route('packages.index') }}"> الباقات</a></li>
+                        @endcan
+
+                        @can('subscribe-list')
+                            <li><a class="nav-link" href="{{ route('subscribers') }}">المشتركين</a></li>
+                        @endcan
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -119,7 +127,7 @@
 
 
     <main class="py-4 text-right ">
-        <div class="container">
+        <div class="container" style="border: 1px solid;padding: 27px;border-radius: 15px;">
             @if(auth()->check())
                 <div class="row">
                     <button class="border-0 mx-2 p-2">

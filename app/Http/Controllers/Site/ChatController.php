@@ -16,10 +16,11 @@ class ChatController extends Controller
 {
     public function index()
     {
-        $chats = Chat::where('sender_id', auth()->user()->id)
-            ->orWhere('receiver_id', auth()->user()->id)
-            ->where('chat_id',null)
-            ->get();
+        $chats = Chat::where('chat_id',null)
+            ->orWhere('sender_id', auth()->user()->id)
+            ->where('receiver_id', auth()->user()->id)
+            ->get()
+            ->unique('chat_id');
 
         return view('site.chat', compact('chats'));
     }

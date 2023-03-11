@@ -2,13 +2,13 @@
 
 
 @section('content')
-    <div class="row">
+    <div class="row"  style="border-bottom: 2px solid;margin-bottom: 30px;">
         <div class="col-lg-12 margin-tb">
             @can('user-create')
-                <div class="pull-left">
-                    <h2>اداره المستخدمين</h2>
+                <div class="pull-left mt-5">
+                    <h2>ادارة المستخدمين</h2>
                 </div>
-                <div class="pull-right my-5">
+                <div class="pull-right mb-2">
                     <a class="btn btn-success" href="{{ route('users.create') }}"> انشاء مستخدم جديد</a>
                 </div>
             @endcan
@@ -25,7 +25,7 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+            <th>#</th>
             <th>الاسم</th>
             <th>البريد الاكتروني</th>
             <th>الادوار</th>
@@ -55,8 +55,13 @@
     </table>
 
 
-    {!! $data->render() !!}
+{{--    {!! $data->render() !!}--}}
 
-
-    <p class="text-center text-primary"><small>Abanoub talaat</small></p>
+<style>
+    .font-medium{
+        display: none;
+    }
+</style>
+{{--    <p class="text-center text-primary"><small>Abanoub talaat</small></p>--}}
 @endsection
+

@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="row mt-5">
+    <div class="row mt-5"  style="border-bottom: 2px solid;margin-bottom: 30px;">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 <h2>رسائل التواصل</h2>
@@ -44,7 +44,7 @@
                         @csrf
                         @method('POST')
                         @can('contact-delete')
-                            <button type="submit" class="btn btn-danger mt-1">Delete</button>
+                            <button type="submit" class="btn btn-danger mt-1">حذف</button>
                         @endcan
                     </form>
                 </td>

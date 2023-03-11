@@ -2,13 +2,13 @@
 
 
 @section('content')
-    <div class="row">
+    <div class="row" style="border-bottom: 2px solid;margin-bottom: 30px;">
         <div class="col-lg-12 margin-tb">
 
-            <div class="pull-left">
+            <div class="pull-left mt-5">
                 <h2>أدراة الادوار والصلاحيات</h2>
             </div>
-            <div class="pull-right my-5">
+            <div class="pull-right mb-2">
                 @can('role-create')
                     <a class="btn btn-success" href="{{ route('roles.create') }}"> أنشاء دور جديد</a>
                 @endcan

@@ -12,12 +12,14 @@ use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\ExecutiveController;
 use App\Http\Controllers\Dashboard\FacilitatorController;
 use App\Http\Controllers\Dashboard\OurMembershipController;
+use App\Http\Controllers\Dashboard\PackageController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\PublishController;
 use App\Http\Controllers\Dashboard\ResuscitationController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\SliderController;
+use App\Http\Controllers\Dashboard\SubscriberController;
 use App\Http\Controllers\Dashboard\TrainerController;
 use App\Http\Controllers\Dashboard\TrainingProgramController;
 use App\Http\Controllers\Dashboard\UpcommingCourseController;
@@ -106,6 +108,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
     Route::resource('chats', ChatController::class);
 
     Route::get('/{chat}/messages', [ChatController::class, 'messages'])->name('chat_messages');
+
+
+    Route::group(['prefix' => 'packages'], function () {
+        Route::get('/', [\App\Http\Controllers\Site\PackageController::class, 'index'])->name('user.packages');
+        Route::get('/subscribe/{package}', [\App\Http\Controllers\Site\PackageController::class, 'subscribe'])->name('user.subscribe');
+    });
 });
 
 //user blocker, who_blocker who_blocked
@@ -122,20 +130,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
         Route::get('/replay/{contactUs}', [\App\Http\Controllers\Dashboard\ContactusController::class, 'reply'])->name('contacts.replay');
         Route::post('/reply/{id}', [\App\Http\Controllers\Dashboard\ContactusController::class, 'postReply'])->name('contacts.replay.post');
         Route::post('/{id}', [\App\Http\Controllers\Dashboard\ContactusController::class, 'destroy'])->name('contacts.destroy');
-
     });
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
+    Route::resource('packages', PackageController::class);
+
+    Route::get('subscribers', [SubscriberController::class, 'index'])->name('subscribers');
 
     Route::get('profile', [ProfileController::class, 'show'])
         ->name('profile.show');
-
     Route::put('profile', [ProfileController::class, 'update'])
         ->name('profile.update');
-
-//    Route::post('delete/image', [CourseController::class, 'deleteImage'])
-//        ->name('delete.course.image');
-
-//    Route::resource('executives', ExecutiveController::class);
 });

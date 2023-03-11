@@ -29,6 +29,10 @@
         </div>
     </div>
 
+    <div class="container text-center my-5">
+        <h4 class="text-right">My name is : {{auth()->user()->name}}</h4>
+
+    </div>
     <div class="container mt-5 mb-5">
         <section style="background-color: #CDC4F9;">
             <div class="container py-5">
@@ -48,8 +52,9 @@
                                                  style="position: relative; height: 400px">
                                                 <ul class="list-unstyled mb-0">
                                                     @foreach($chats as $id =>$chat)
+
                                                         <li class="p-2 border-bottom "
-                                                            onclick="getChat({{$chat->id}}, {{auth()->user()->id}},{{$chat->receiver->id}})">
+                                                            onclick="getChat({{$chat->id}}, {{auth()->user()->id}},{{$chat->sender->id==auth()->user()->id ? $chat->receiver->id:$chat->sender->id}})">
                                                             <button href=""
                                                                     class="d-flex justify-content-between border-none"
                                                                     style="border: none;background: transparent">
@@ -60,20 +65,22 @@
                                                                             alt="avatar"
                                                                             class="d-flex align-self-center me-3"
                                                                             width="60">
-                                                                        <span class="badge bg-success badge-dot"></span>
+                                                                        <span
+                                                                            class="badge bg-success badge-dot"></span>
                                                                     </div>
                                                                     <div class="pt-1" style="text-align: right;">
-                                                                        <p class="fw-bold mb-0">{{$chat->receiver->name}}</p>
+                                                                        <p class="fw-bold mb-0">{{$chat->receiver->id == auth()->user()->id ? $chat->sender->name:$chat->receiver->name}}</p>
                                                                         <p class="small text-muted">{{$chat->lastMessage}}</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="pt-1" style="    margin-right: 20px;">
                                                                     {{--                                                                <p class="small text-muted mb-1">Just now</p>--}}
-{{--                                                                    <span--}}
-{{--                                                                        class="badge bg-danger rounded-pill float-end">3</span>--}}
+                                                                    {{--                                                                    <span--}}
+                                                                    {{--                                                                        class="badge bg-danger rounded-pill float-end">3</span>--}}
                                                                 </div>
                                                             </button>
                                                         </li>
+
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -122,7 +129,7 @@
 
     <script type="text/javascript">
 
-        function getChat(chatId, loggedUser,receiverId) {
+        function getChat(chatId, loggedUser, receiverId) {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
