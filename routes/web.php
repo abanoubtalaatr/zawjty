@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\CrrController;
 use App\Http\Controllers\Dashboard\EventController;
 use App\Http\Controllers\Dashboard\ExecutiveController;
 use App\Http\Controllers\Dashboard\FacilitatorController;
+use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\OurMembershipController;
 use App\Http\Controllers\Dashboard\PackageController;
 use App\Http\Controllers\Dashboard\PartnerController;
@@ -114,6 +115,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
         Route::get('/', [\App\Http\Controllers\Site\PackageController::class, 'index'])->name('user.packages');
         Route::get('/subscribe/{package}', [\App\Http\Controllers\Site\PackageController::class, 'subscribe'])->name('user.subscribe');
     });
+
+    Route::group(['prefix' => 'notifications'], function (){
+        Route::get('notifications', [\App\Http\Controllers\Site\NotificationController::class, 'index'])->name('user.notifications.index');
+        Route::get('/mark-as-read/{id}', [\App\Http\Controllers\Site\NotificationController::class, 'markAsRead'])->name('user.notifications.mark_as_read');
+        Route::get('/read-all', [\App\Http\Controllers\Site\NotificationController::class, 'readAll'])->name('user.notifications.read_all');
+    });
 });
 
 //user blocker, who_blocker who_blocked
@@ -142,4 +149,13 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
         ->name('profile.show');
     Route::put('profile', [ProfileController::class, 'update'])
         ->name('profile.update');
+
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('notifications.index');
+        Route::get('/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('admin.notifications.mark_as_read');
+        Route::get('/read-all', [NotificationController::class, 'readAll'])->name('admin.notifications.read_all');
+        Route::get('show-send-to-user/{user}', [NotificationController::class, 'showSendNotificationToUser'])->name('show_send_notification_to_user');
+        Route::post('send-to-user/{user}', [NotificationController::class, 'sendNotificationToUser'])->name('post_send_notification_to_user');
+
+    });
 });

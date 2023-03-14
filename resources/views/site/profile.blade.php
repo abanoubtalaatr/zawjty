@@ -15,6 +15,23 @@
                 <div class="brdr-text-footer-4"></div>
             </h5>
         </div>
+        @if(auth()->user()->currentPackage())
+            <div class="text-right my-5 ">
+                <div class="">
+                    مرحبا بك معانا في موقع زوجتي :  <strong class="border px-3 py-2 rounded">{{auth()->user()->name}}</strong>
+                </div>
+                <hr>
+                <div>
+                    <h4>باقتك الحالية</h4>
+                    <p>
+                    <h6>باقة:  {{auth()->user()->currentPackage()->period}} شهر </h6>
+                    <h6>تنتهي في:  {{auth()->user()->currentPackage()->expire_at}}</h6>
+                    <h6>السعر : {{auth()->user()->currentPackage()->price}} $</h6>
+                    </p>
+                </div>
+
+            </div>
+        @endif
         <form action="{{route('user.update_profile',auth()->user()->id)}}" method="post">
             <div class="row row-cols-2 row-cols-md-2 mt-5 p-3" style="">
                 @csrf

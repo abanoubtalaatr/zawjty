@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>زوجتي</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Fonts -->
@@ -56,7 +56,9 @@
                 <i class="fas fa-user-circle"></i>
             </a>
             <div class="dropdown-menu text-right">
-                <a class="dropdown-item" href="{{route('chats.index')}}">الرسائل</a>
+                @if(in_array('seen_message',auth()->user()->features()))
+                    <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                @endif
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
                    href="">الاشعارات</a>
@@ -90,10 +92,12 @@
                     <i class="fas fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu text-right">
-                    <a class="dropdown-item" href="{{route('chats.index')}}">الرسائل</a>
+                    @if(in_array('seen_message',auth()->user()->features()))
+                        <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                    @endif
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
-                       href="javascript:void(0)">الاشعارات</a>
+                    <a class="dropdown-item"
+                       href="{{route('user.notifications.index')}}">الاشعارات</a>
                     <div class="dropdown-divider"></div>
                     @if(auth()->user())
                         @if(auth()->user()->user_type=='user' )
@@ -135,22 +139,25 @@
     </div>
 </nav>
 {{--sidebar--}}
-
+{{--{{dd()}}--}}
 <nav class="slidbar-menu slider-navs">
     <ul>
         @if(auth()->user() && auth()->user()->user_type=='user')
-            <li class="nav-item">
-                <a class="nav-link" href="/user/profile">
-                    <i class="fas ml-2 fa-edit"></i>
-                    تعديل بياناتي
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('user.image')}}">
-                    <i class="fas ml-2 fa-camera"></i>
-                    الصورة الشخصية
-                </a>
-            </li>
+            @if(in_array('image',auth()->user()->features()))
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/profile">
+                        <i class="fas ml-2 fa-edit"></i>
+                        تعديل بياناتي
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.image')}}">
+                        <i class="fas ml-2 fa-camera"></i>
+                        الصورة الشخصية
+                    </a>
+                </li>
+            @endif
 
             <li class="nav-item">
                 <a class="nav-link" href="javascript:void(0)">
@@ -159,11 +166,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="upgrade.html">
+                <a class="nav-link" href="/user/packages">
                     <i class="fas ml-2 fa-money-check-alt"></i>
                     ترقية عضويتي
                 </a>
             </li>
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{{route('user.i_likes')}}">
@@ -172,32 +180,35 @@
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/user/likes-me">
-                    <i class="fas ml-2 fa-grin-hearts"></i>
-                    الأعضاء المعجبين بصفحتي
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('user.visit_my_profile')}}">
-                    <i class="fas ml-2 fa-eye"></i>
-                    اعضاء زارو صفحتي
-                </a>
-            </li>
+            @if(in_array('visit_my_profile',auth()->user()->features()))
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/likes-me">
+                        <i class="fas ml-2 fa-grin-hearts"></i>
+                        الأعضاء المعجبين بصفحتي
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user.visit_my_profile')}}">
+                        <i class="fas ml-2 fa-eye"></i>
+                        اعضاء زارو صفحتي
+                    </a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/user/blocked-user">
-                    <i class="fas ml-2 fa-ban"></i>
-                    الأعضاء المحجوبين
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/user/stories">
-                    <i class="fas ml-2 fa-dove"></i>
-                    سجل قصتي الناجحة
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/blocked-user">
+                        <i class="fas ml-2 fa-ban"></i>
+                        الأعضاء المحجوبين
+                    </a>
+                </li>
+            @endif
+            @if(in_array('story',auth()->user()->features()))
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/stories">
+                        <i class="fas ml-2 fa-dove"></i>
+                        سجل قصتي الناجحة
+                    </a>
+                </li>
+            @endif
         @endif
     </ul>
 </nav>

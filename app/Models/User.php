@@ -74,16 +74,44 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+//    protected $with = ['subscribe'];
+
     // that i send it
     public function senderChats()
     {
-        return $this->hasMany(Chat::class,'sender_id');
+        return $this->hasMany(Chat::class, 'sender_id');
     }
 
     //that i receiver it
     public function receiverChats()
     {
-        return $this->hasMany(Chat::class,'receiver_id');
+        return $this->hasMany(Chat::class, 'receiver_id');
+    }
+
+    public function package()
+    {
+        return Subscribe::where('user_id', $this->id)->whereDate('expire_at', '>', Carbon::today())->orderBy('created_at', 'desc')->first();
+    }
+
+    //feature of package
+    public function features()
+    {
+        if ($this->package()) {
+            $idsOfFeature = array_column(FeaturePackage::where('package_id', $this->package()->id)->get('feature_id')->toArray(), 'feature_id');
+            return array_column(Feature::whereIn('id', $idsOfFeature)->get('key')->toArray(), 'key');
+        }
+        return null;
+    }
+
+    public function currentPackage()
+    {
+        if ($this->package()) {
+            $package = Package::find($this->package()->package_id);
+            $package['expire_at'] = $this->package()->expire_at;
+            return $package;
+        }
+
+        return null;
     }
 
     public function age()

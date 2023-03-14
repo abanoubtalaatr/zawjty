@@ -57,10 +57,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        $members = OurMembership::all();
-
-        return view('home', compact('events', 'members'));
+//        return view('home', compact('events', 'members'));
     }
 
 

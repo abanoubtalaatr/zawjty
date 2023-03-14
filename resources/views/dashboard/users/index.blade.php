@@ -29,7 +29,7 @@
             <th>الاسم</th>
             <th>البريد الاكتروني</th>
             <th>الادوار</th>
-            <th width="280px">الاجراء</th>
+            <th width="350px">الاجراء</th>
         </tr>
         @foreach ($data as $key => $user)
             <tr>
@@ -49,6 +49,7 @@
                     {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('حذف', ['class' => 'btn btn-danger  mt-1']) !!}
                     {!! Form::close() !!}
+                    <a class="btn btn-info" href="{{ route('show_send_notification_to_user',$user->id) }}">أرسال اشعار</a>
                 </td>
             </tr>
         @endforeach
