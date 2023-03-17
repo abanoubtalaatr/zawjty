@@ -22,6 +22,28 @@
                             <h5>الصلاحيات والادوار</h5>
                         </a>
                     </div>
+                    <div class="col-lg-4 col-lg-4  mb-2  col-md-6 col-sm-12 border text-center rounded bg-info py-2">
+                        <a href="{{ route('packages.index') }}" class="text-dark">
+                            <h5>الباقات</h5>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-lg-4  mb-2  col-md-6 col-sm-12 border text-center rounded bg-info py-2">
+                        <a href="{{ route('subscribers') }}" class="text-dark">
+                            <h5>المشتركين</h5>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-lg-4  mb-2  col-md-6 col-sm-12 border text-center rounded bg-info py-2">
+                        <a href="{{ route('notifications.index') }}" class="text-dark">
+                            <h5>الأشعارات</h5>
+                        </a>
+                    </div>
+
+                    <div class="col-lg-4 col-lg-4  mb-2  col-md-6 col-sm-12 border text-center rounded bg-info py-2">
+                        <a href="{{ route('privacy.index') }}" class="text-dark">
+                            <h5>صفحة ساسية الخصوصية</h5>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

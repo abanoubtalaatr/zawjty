@@ -116,8 +116,8 @@
                 <div class="brdr-text-footer-5"></div>
             </h5>
         </div>
-        <div class="slide-container">
-            <img id="slide-left" class="arrow" src="{{asset('imgs/next.png')}}">
+        <div>
+{{--            <img id="slide-left" class="arrow" src="{{asset('imgs/next.png')}}">--}}
             <div class="container-fluid parent-box" id="slider">
                 @foreach($mostPopular as $index => $popular)
                     <div class="thumbnail">
@@ -125,7 +125,7 @@
                             <a href="user/{{$popular->id}}/details">
                                 <div class="card px-4" style="border-radius: 5px">
                                     <div class="card-body">
-                                        <div>
+                                        <div  style="width: 135px">
                                             <img src="https://picsum.photos/200/300?random={{$index}}" class="w-100"
                                                  alt="...">
                                         </div>
@@ -140,7 +140,7 @@
                 @endforeach
             </div>
 
-            <img id="slide-right" class="arrow" src="{{asset('imgs/left-arrow.png')}}">
+{{--            <img id="slide-right" class="arrow" src="{{asset('imgs/left-arrow.png')}}">--}}
         </div>
     </div>
     <div class="container-fluid">
@@ -150,7 +150,7 @@
         </svg>
         <div class="row row-cols-2 new-quick-links-55 row-cols-md-4">
             <div class="col mb-1 mt-1">
-                <a href="onlinenow.html">
+                <a href="/user/normal">
                     <div class="card">
                         <div class="text-center">
                             <img src="{{asset('imgs/onlinenow.svg')}}" class="card-img-top w-75" alt="onlinenow">
@@ -162,7 +162,7 @@
                 </a>
             </div>
             <div class="col mb-1 mt-1">
-                <a href="storylove.html">
+                <a href="/user/stories">
                     <div class="card">
                         <div class="text-center">
                             <img src="{{asset('imgs/storyloves.svg')}}" class="card-img-top w-75" alt="storyloves">
@@ -207,16 +207,16 @@
                 <div class="brdr-text-footer-5"></div>
             </h5>
         </div>
-        <div class="slide-container">
-            <img id="slide-left" class="arrow" src="{{asset('imgs/next.png')}}">
-            <div class="container-fluid parent-box" id="slider">
+        <div class="">
+{{--            <img id="slide-left" class="arrow" src="{{asset('imgs/next.png')}}">--}}
+            <div class="container-fluid parent-box"  style="overflow-x: scroll">
                 @foreach($newUsers as $index=> $user)
                     <div class="thumbnail">
                         <div class="col mb-4 text-center">
                             <a href="/admin/{{$user->id}}/details">
                                 <div class="card px-4" style="border-radius: 5px">
-                                    <div class="card-body">
-                                        <div>
+                                    <div class="card-body w-100">
+                                        <div style="width: 135px">
                                             <img src="https://picsum.photos/200/300?random={{$index}}" class="w-100" alt="...">
                                         </div>
                                         <h5 class="card-title">{{$user->name}}</h5>
@@ -229,7 +229,7 @@
                     </div>
                 @endforeach
             </div>
-            <img id="slide-right" class="arrow" src="{{asset('imgs/left-arrow.png')}}">
+{{--            <img id="slide-right" class="arrow" src="{{asset('imgs/left-arrow.png')}}">--}}
         </div>
     </div>
 @endsection

@@ -15,6 +15,7 @@ use App\Http\Controllers\Dashboard\NotificationController;
 use App\Http\Controllers\Dashboard\OurMembershipController;
 use App\Http\Controllers\Dashboard\PackageController;
 use App\Http\Controllers\Dashboard\PartnerController;
+use App\Http\Controllers\Dashboard\PrivacyController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\PublishController;
 use App\Http\Controllers\Dashboard\ResuscitationController;
@@ -32,7 +33,9 @@ use App\Http\Controllers\Site\ChatController;
 use App\Http\Controllers\Site\ContactUsController;
 use App\Http\Controllers\Site\HomeController;
 use App\Http\Controllers\Site\StoryController;
+use App\Models\Subscribe;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -88,7 +91,11 @@ Route::group(['prefix' => 'user'], function () {
     //stories
     Route::get('/stories', [StoryController::class, 'index']);
     Route::get('/story', [StoryController::class, 'show'])->name('user.story.show');
-    Route::post('/story', [StoryController::class, 'store'])->name('user.story.store');
+
+    //privacy
+    Route::get('privacy', [\App\Http\Controllers\Site\PrivacyController::class, 'index'])
+        ->name('user.privacy');
+
 });
 
 //ordinary user
@@ -116,13 +123,28 @@ Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
         Route::get('/subscribe/{package}', [\App\Http\Controllers\Site\PackageController::class, 'subscribe'])->name('user.subscribe');
     });
 
-    Route::group(['prefix' => 'notifications'], function (){
+    Route::group(['prefix' => 'notifications'], function () {
         Route::get('notifications', [\App\Http\Controllers\Site\NotificationController::class, 'index'])->name('user.notifications.index');
         Route::get('/mark-as-read/{id}', [\App\Http\Controllers\Site\NotificationController::class, 'markAsRead'])->name('user.notifications.mark_as_read');
         Route::get('/read-all', [\App\Http\Controllers\Site\NotificationController::class, 'readAll'])->name('user.notifications.read_all');
     });
+    Route::post('/story', [StoryController::class, 'store'])->name('user.story.store');
 });
-
+Route::get('/package/{package}/success', function ($package) {
+    $package = \App\Models\Package::find($package);
+    $subscribe = Subscribe::create([
+        'package_id' => $package->id,
+        'user_id' => auth()->user()->id,
+        'expire_at' => Carbon::now()->addMonths($package->period),
+        'paymentId' => request()->paymentId,
+    ]);
+    \Illuminate\Support\Facades\Session::flash('payment_successfully', true);
+    $packages = \App\Models\Package::all();
+    return view('site.packages', compact('packages'));
+});
+//Route::get('/package/{package}/fail', function ($package) {
+//    echo('نأسف عملية الدفع لم تكتمل جرب في وقت اخر');
+//});
 //user blocker, who_blocker who_blocked
 //contacts us
 Route::get('/contact-us', [\App\Http\Controllers\HomeController::class, 'contactUs'])->name('contactUs');
@@ -156,6 +178,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin'], function () {
         Route::get('/read-all', [NotificationController::class, 'readAll'])->name('admin.notifications.read_all');
         Route::get('show-send-to-user/{user}', [NotificationController::class, 'showSendNotificationToUser'])->name('show_send_notification_to_user');
         Route::post('send-to-user/{user}', [NotificationController::class, 'sendNotificationToUser'])->name('post_send_notification_to_user');
-
     });
+
+    Route::get('privacy', [PrivacyController::class, 'index'])->name('privacy.index');
+
+    Route::post('privacy', [PrivacyController::class, 'updateOrStore'])
+        ->name('privacy.store');
 });

@@ -9,6 +9,13 @@
             <div class="brdr-text"></div>
         </div>
     </div>
+    @if ($message = Session::get('payment_successfully'))
+        <div class="alert alert-success alert-block w-25 my-5">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>{{ 'تم الاشتراك ف الباقة بنجاح' }}</strong>
+        </div>
+{{--        <img class="rounded" src="{{asset('\\')}}{{ Session::get('avatar') }}" width="300" height="300">--}}
+    @endif
     <div class="container">
         <div class="row row-cols-1 row-bg-up-to-icons row-cols-md-1">
             <div class="col mb-0">
@@ -35,7 +42,8 @@
                                 @endforeach
                             </ul>
                             <button class="btn global-btn-4 w-100">{{$package->price}} $</button>
-                            <a href="{{route('user.subscribe', ['package' => $package->id])}}" class="btn global-btn-1 mt-4">
+                            <a href="{{route('user.subscribe', ['package' => $package->id])}}"
+                               class="btn global-btn-1 mt-4">
                                 اشترك الان <i class="fas fa-long-arrow-alt-left"></i>
                             </a>
                         </div>

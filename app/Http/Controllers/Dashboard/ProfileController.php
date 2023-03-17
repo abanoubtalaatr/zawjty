@@ -47,18 +47,18 @@ class ProfileController extends Controller
     public function imagePost(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'avatar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        $imageName = time() . '.' . $request->image->extension();
+        $imageName = time() . '.' . $request->avatar->extension();
 
-        $request->image->move(public_path('users'), $imageName)->getFilename();
+        $request->avatar->move(public_path('users'), $imageName)->getFilename();
 
         $user = User::find(Auth::user()->id);
 
-        $user->update(['image' => $imageName]);
+        $user->update(['avatar' => $imageName]);
 
         return back()
             ->with('success', 'تم رفع صورتك الشخصية.')
-            ->with('image', 'users\\' . $imageName);
+            ->with('avatar', 'users\\' . $imageName);
     }
 }

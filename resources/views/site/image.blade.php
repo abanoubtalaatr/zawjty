@@ -20,11 +20,11 @@
                 <button type="button" class="close" data-dismiss="alert">×</button>
                 <strong>{{ $message }}</strong>
             </div>
-            <img class="rounded" src="{{asset('\\')}}{{ Session::get('image') }}" width="300" height="300">
+            <img class="rounded" src="{{asset('\\')}}{{ Session::get('avatar') }}" width="300" height="300">
         @endif
         @if(!Session::get('success'))
-            @if(auth()->check()&& !is_null(auth()->user()->image))
-                <img class="rounded" src="{{asset('\\users\\')}}{{ auth()->user()->image }}" width="300" height="300">
+            @if(auth()->check()&& !is_null(auth()->user()->avatar))
+                <img class="rounded" src="{{asset('\\users\\')}}{{ auth()->user()->avatar }}" width="300" height="300">
             @endif
         @endif
         @if (count($errors) > 0)
@@ -44,7 +44,7 @@
                 @method('post')
                 <div class="row"><br>
                     <div class="col-md-6">
-                        <input type="file" name="image" class="form-control">
+                        <input type="file" name="avatar" class="form-control">
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-success">رفع</button>

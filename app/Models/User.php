@@ -53,6 +53,7 @@ class User extends Authenticatable
         'marital_status_id',
         'having_children_id',
         'image',
+        'avatar',
     ];
 
     /**
@@ -97,7 +98,8 @@ class User extends Authenticatable
     public function features()
     {
         if ($this->package()) {
-            $idsOfFeature = array_column(FeaturePackage::where('package_id', $this->package()->id)->get('feature_id')->toArray(), 'feature_id');
+            $idsOfFeature = array_column(FeaturePackage::where('package_id', $this->package()->package_id)->get('feature_id')->toArray(), 'feature_id');
+            
             return array_column(Feature::whereIn('id', $idsOfFeature)->get('key')->toArray(), 'key');
         }
         return null;

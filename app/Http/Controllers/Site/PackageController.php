@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Package;
 use App\Models\Subscribe;
+use App\Models\User;
+use App\Services\MyFatoorahService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -18,13 +20,10 @@ class PackageController extends Controller
         return view('site.packages', compact('packages'));
     }
 
-    public function subscribe(Package $package)
+    public function subscribe(Request $request, Package $package)
     {
-        $subscribe = Subscribe::create([
-            'package_id' => $package->id,
-            'user_id' => auth()->user()->id,
-            'expire_at' => Carbon::now()->addMonths($package->period),
-        ]);
-
+        $myFatora = new MyFatoorahService();
+        $user = User::find(auth()->user()->id);
+       return $myFatora->pay($request, $package, $user);
     }
 }

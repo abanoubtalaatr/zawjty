@@ -35,6 +35,7 @@ class PermissionTableSeeder extends Seeder
             'package-delete',
             'subscribe-list',
             'notification-list',
+            'privacy-list',
         ];
 
         foreach ($permissions as $permission) {

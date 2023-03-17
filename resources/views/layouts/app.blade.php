@@ -56,8 +56,10 @@
                 <i class="fas fa-user-circle"></i>
             </a>
             <div class="dropdown-menu text-right">
-                @if(in_array('seen_message',auth()->user()->features()))
-                    <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                @if(auth()->check() && auth()->user()->user_type=='user')
+                    @if(in_array('seen_message',auth()->user()->features()))
+                        <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                    @endif
                 @endif
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
@@ -92,8 +94,10 @@
                     <i class="fas fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu text-right">
-                    @if(in_array('seen_message',auth()->user()->features()))
-                        <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                    @if(auth()->check() && auth()->user()->user_type=='user')
+                        @if(in_array('seen_message',auth()->user()->features()))
+                            <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                        @endif
                     @endif
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item"
@@ -201,13 +205,15 @@
                     </a>
                 </li>
             @endif
-            @if(in_array('story',auth()->user()->features()))
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/stories">
-                        <i class="fas ml-2 fa-dove"></i>
-                        سجل قصتي الناجحة
-                    </a>
-                </li>
+            @if(auth()->check()&& auth()->user()->user_type=='user')
+                @if(in_array('story',auth()->user()->features()))
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/stories">
+                            <i class="fas ml-2 fa-dove"></i>
+                            سجل قصتي الناجحة
+                        </a>
+                    </li>
+                @endif
             @endif
         @endif
     </ul>
@@ -267,9 +273,9 @@
                     </h5>
                 </div>
                 <ul class="list-footer">
-                    <li><a href="policy.html">سياسة الخصوصية</a></li>
+                    <li><a href="{{route('user.privacy')}}">سياسة الخصوصية</a></li>
                     <li><a href="/contact-us">تحتاج مساعدة ؟</a></li>
-                    <li><a href="onlinenow.html">المتواجدين الأن</a></li>
+{{--                    <li><a href="onlinenow.html">المتواجدين الأن</a></li>--}}
                     <li><a href="/user/new-woman">جديد الإناث المسجلين</a></li>
                 </ul>
             </div>

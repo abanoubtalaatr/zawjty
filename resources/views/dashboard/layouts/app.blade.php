@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Lema') }}</title>
+    <title>{{ config('app.name', 'زوجتي') }}</title>
     <!-- Scripts -->
 {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
 <!-- Fonts -->
@@ -16,7 +16,11 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
     <!-- Styles -->
-
+    <style>
+        #tinymce {
+            text-align: right;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -97,6 +101,11 @@
                             <li><a class="nav-link" href="{{ route('notifications.index') }}">الأشعارات</a></li>
                         @endcan
 
+                        @can('privacy-list')
+                            <li><a class="nav-link" href="{{ route('privacy.index') }}">صفحة ساسية الخصوصية</a></li>
+                        @endcan
+
+
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -104,16 +113,16 @@
                             </a>
 
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('تسجيل خروج') }}
-                                </a>
+                            <div class="dropdown-menu text-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('profile.show') }}"
 
                                 >
                                     {{ __('تعديل الملف الشخصي') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('تسجيل خروج') }}
                                 </a>
 
 
