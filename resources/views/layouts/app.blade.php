@@ -62,8 +62,10 @@
                     @endif
                 @endif
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
-                   href="">الاشعارات</a>
+                @if(auth()->user())
+                    <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
+                       href="">الاشعارات</a>
+                @endif
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="">تسجيل الخروج</a>
             </div>
@@ -89,32 +91,35 @@
                     البحث
                 </a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fas fa-user-circle"></i>
-                </a>
-                <div class="dropdown-menu text-right">
-                    @if(auth()->check() && auth()->user()->user_type=='user')
-                        @if(in_array('seen_message',auth()->user()->features()))
-                            <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+            @if(auth()->check() && auth()->user()->user_type =='user')
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="dropdown-menu text-right">
+                        @if(auth()->check() && auth()->user()->user_type=='user')
+                            @if(in_array('seen_message',auth()->user()->features()))
+                                <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
+                            @endif
                         @endif
-                    @endif
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item"
-                       href="{{route('user.notifications.index')}}">الاشعارات</a>
-                    <div class="dropdown-divider"></div>
-                    @if(auth()->user())
-                        @if(auth()->user()->user_type=='user' )
-                            <form action="{{route('user.logout')}}" method="post">
-                                @csrf
-                                @method('post')
-                                <button class="dropdown-item" type="submit">تسجيل الخروج</button>
-                            </form>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item"
+                           href="{{route('user.notifications.index')}}">الاشعارات</a>
+                        <div class="dropdown-divider"></div>
+                        @if(auth()->user())
+                            @if(auth()->user()->user_type=='user' )
+                                <form action="{{route('user.logout')}}" method="post">
+                                    @csrf
+                                    @method('post')
+                                    <button class="dropdown-item" type="submit">تسجيل الخروج</button>
+                                </form>
+                            @endif
                         @endif
-                    @endif
 
-                </div>
-            </li>
+                    </div>
+                </li>
+            @endif
             <li class="nav-item">
                 <a>
                     <input type="checkbox" id="switch" name="mode">
@@ -163,12 +168,7 @@
                 </li>
             @endif
 
-            <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)">
-                    <i class="fas ml-2 fa-share-alt"></i>
-                    وسائل التواصل خارج الموقع
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="/user/packages">
                     <i class="fas ml-2 fa-money-check-alt"></i>
@@ -275,7 +275,7 @@
                 <ul class="list-footer">
                     <li><a href="{{route('user.privacy')}}">سياسة الخصوصية</a></li>
                     <li><a href="/contact-us">تحتاج مساعدة ؟</a></li>
-{{--                    <li><a href="onlinenow.html">المتواجدين الأن</a></li>--}}
+                    {{--                    <li><a href="onlinenow.html">المتواجدين الأن</a></li>--}}
                     <li><a href="/user/new-woman">جديد الإناث المسجلين</a></li>
                 </ul>
             </div>

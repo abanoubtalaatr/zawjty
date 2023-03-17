@@ -36,7 +36,7 @@ class ProfileController extends Controller
         }
 
         return redirect()->route('profile.show')
-            ->with('success', 'profile updated successfully.');
+            ->with('success', 'تم التعديل بنجاح.');
     }
 
     public function image()

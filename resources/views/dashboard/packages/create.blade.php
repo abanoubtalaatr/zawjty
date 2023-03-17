@@ -33,13 +33,13 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>المدة بالأشهر :</strong>
-                {!! Form::number('price', null, array('placeholder' => 'المدة','class' => 'form-control')) !!}
+                {!! Form::number('period', null, array('placeholder' => 'المدة','class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>السعر :</strong>
-                {!! Form::number('period', null, array('placeholder' => 'السعر','class' => 'form-control',)) !!}
+                {!! Form::number('price', null, array('placeholder' => 'السعر','class' => 'form-control',)) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

@@ -11,7 +11,7 @@
     </div>
     <div class="container">
         <div class="text-right mr-3 mt-5">
-            <h5 class="card-title title-article">{{$privacy->title}}</h5>
+            <h5 class="card-title">{{$privacy->title}}</h5>
             <small class="card-text">أخر تحديث : {{\Carbon\Carbon::parse($privacy->updated_at)->format('Y-M-d')}}</small>
         </div>
         <div class="row row-cols-1 row-cols-md-1 policy-sjsj">
