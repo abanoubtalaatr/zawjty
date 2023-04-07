@@ -256,11 +256,11 @@
                     </h5>
                 </div>
                 <ul class="list-footer">
-                    <li><a href="aboutzawjaty.html">من نحن ؟</a></li>
+                    <li><a href="{{route('about')}}">من نحن ؟</a></li>
                     <li><a href="/user/register">دخول / تسجيل</a></li>
                     <li><a href="/user/search">البحث المتقدم</a></li>
                     <li><a href="/user/stories">قصص ناجحة</a></li>
-                    <li><a href="articles.html">المقالات</a></li>
+                    <li><a href="{{route('article')}}">المقالات</a></li>
                 </ul>
             </div>
         </div>

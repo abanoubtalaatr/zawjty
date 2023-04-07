@@ -1650,3 +1650,108 @@ details[open] summary {
 .warddddd {
   background-color: var(--n-e-w-bg-1);
 }/*# sourceMappingURL=main.css.map */
+.new-bgs{
+    background-color: var(--n-e-w-bg-1);
+}
+.title-article{
+    color: var(--n-e-w-color);
+}
+.box-articles-new-subjects {
+    height: 280px;
+}
+
+.box-articles-new-subjects .card-body {
+    position: relative;
+}
+
+.box-articles-new-subjects .card-body p {
+    line-height: 30px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--n-e-w-color-1);
+    font-weight: bold;
+}
+
+.box-articles-new-subjects .card-body .box-inbox {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.box-articles-new-subjects .see-more-btnz {
+    border-radius: 0px;
+    background-color: #da4761;
+    padding: 3px 10px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    color: #fff;
+}
+
+.box-articles-new-subjects .datas-art {
+    width: fit-content;
+    margin: 20px 0px;
+}
+
+.jumbotron-box-lg {
+    background-color: var(--n-e-w-bg-1);
+}
+
+.jumbotron-box-lg h4 {
+    color: var(--n-e-w-color);
+}
+
+.jumbotron-box-lg .box-1-jumb p,
+.jumbotron-box-lg .box-2-jumb p {
+    width: 75%;
+    line-height: 30px;
+    color: var(--n-e-w-color-1);
+    font-weight: bold;
+}
+
+.jumbotron-box-lg .jumb-title-19 {
+    color: var(--n-e-w-color) !important;
+    font-weight: bold;
+}
+
+.jumbotron-box-lg hr {
+    background: var(--n-e-w-color);
+}
+
+.jumbotron-box-lg .box-1-jumb {
+    color: var(--n-e-w-color-1);
+}
+
+.jumbotron-box-lg .txt-ju-ju {
+    color: var(--n-e-w-color);
+}
+
+.becare-ofurself {
+    text-align: left;
+    font-weight: bold;
+    quotes: "«""»""‹""›";
+    color: var(--color-cd-0);
+}
+
+@media screen and (max-width: 600px) {
+    .jumbotron-box-lg .box-1-jumb p,
+    .jumbotron-box-lg .box-2-jumb p {
+        width: 100%;
+    }
+
+    .becare-ofurself {
+        text-align: center;
+        background-color: var(--color-bg-jumbtron);
+        padding: 10px 15px;
+        border-radius: 4px;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 768px) {
+    .jumbotron-box-lg .box-1-jumb p,
+    .jumbotron-box-lg .box-2-jumb p {
+        width: 100%;
+    }
+}

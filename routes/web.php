@@ -58,6 +58,8 @@ Route::get('/', function () {
 
     return view('welcome', compact('newUsers', 'mostPopular'));
 });
+Route::view('about', 'site.about')->name('about');
+Route::view('article', 'site.article')->name('article');
 
 Auth::routes();
 
