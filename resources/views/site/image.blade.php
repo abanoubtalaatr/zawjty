@@ -44,7 +44,11 @@
                 @method('post')
                 <div class="row"><br>
                     <div class="col-md-6">
-                        <input type="file" name="avatar" class="form-control">
+                        <input type="file" name="avatar" id="image" class="form-control">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <img id="preview-image-before-upload" class="my-2"
+                             style="max-height: 250px;">
                     </div>
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-success">رفع</button>
@@ -54,4 +58,28 @@
         </form>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function (e) {
+
+
+            $('#image').change(function(){
+
+                let reader = new FileReader();
+
+                reader.onload = (e) => {
+
+                    $('#preview-image-before-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+
+            });
+
+        });
+
+    </script>
 @endsection

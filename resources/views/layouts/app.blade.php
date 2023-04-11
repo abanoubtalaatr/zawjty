@@ -56,12 +56,16 @@
                 <i class="fas fa-user-circle"></i>
             </a>
             <div class="dropdown-menu text-right">
-                @if(auth()->check() && auth()->user()->user_type=='user')
+                <a class="dropdown-item" href="/">الرئيسية</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/user/search">البحث</a>
+                <div class="dropdown-divider"></div>
+                @if(auth()->check() && auth()->user()->user_type=='user' && !empty(auth()->user()->features()))
                     @if(in_array('seen_message',auth()->user()->features()))
                         <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
                     @endif
                 @endif
-                <div class="dropdown-divider"></div>
+
                 @if(auth()->user())
                     <a class="dropdown-item" type="button" data-toggle="modal" data-target="#exampleModalNotification"
                        href="">الاشعارات</a>
@@ -98,7 +102,11 @@
                         <i class="fas fa-user-circle"></i>
                     </a>
                     <div class="dropdown-menu text-right">
-                        @if(auth()->check() && auth()->user()->user_type=='user')
+                        <a class="dropdown-item" href="/">الرئيسية</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/search">البحث</a>
+                        <div class="dropdown-divider"></div>
+                        @if(auth()->check() && auth()->user()->user_type=='user' && !empty(auth()->user()->features()))
                             @if(in_array('seen_message',auth()->user()->features()))
                                 <a class="dropdown-item" href="{{route('chatify')}}">الرسائل</a>
                             @endif
@@ -121,10 +129,7 @@
                 </li>
             @endif
             <li class="nav-item">
-                <a>
-                    <input type="checkbox" id="switch" name="mode">
-                    <label for="switch" class="mt-2 label"></label>
-                </a>
+                <div class="toggleTheme"></div>
             </li>
 
             <li class="nav-item">
@@ -151,22 +156,21 @@
 {{--{{dd()}}--}}
 <nav class="slidbar-menu slider-navs">
     <ul>
-        @if(auth()->user() && auth()->user()->user_type=='user')
-            @if(in_array('image',auth()->user()->features()))
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/profile">
-                        <i class="fas ml-2 fa-edit"></i>
-                        تعديل بياناتي
-                    </a>
-                </li>
+        @if(auth()->user() && auth()->user()->user_type=='user' )
 
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('user.image')}}">
-                        <i class="fas ml-2 fa-camera"></i>
-                        الصورة الشخصية
-                    </a>
-                </li>
-            @endif
+            <li class="nav-item">
+                <a class="nav-link" href="/user/profile">
+                    <i class="fas ml-2 fa-edit"></i>
+                    تعديل بياناتي
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('user.image')}}">
+                    <i class="fas ml-2 fa-camera"></i>
+                    الصورة الشخصية
+                </a>
+            </li>
 
 
             <li class="nav-item">
@@ -184,7 +188,13 @@
                 </a>
             </li>
 
-            @if(in_array('visit_my_profile',auth()->user()->features()))
+            <li class="nav-item">
+                <a class="nav-link" href="/user/stories">
+                    <i class="fas ml-2 fa-dove"></i>
+                    سجل قصتي الناجحة
+                </a>
+            </li>
+            @if(!empty(auth()->user()->features()) && in_array('visit_my_profile',auth()->user()->features()) )
                 <li class="nav-item">
                     <a class="nav-link" href="/user/likes-me">
                         <i class="fas ml-2 fa-grin-hearts"></i>
@@ -204,16 +214,6 @@
                         الأعضاء المحجوبين
                     </a>
                 </li>
-            @endif
-            @if(auth()->check()&& auth()->user()->user_type=='user')
-                @if(in_array('story',auth()->user()->features()))
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user/stories">
-                            <i class="fas ml-2 fa-dove"></i>
-                            سجل قصتي الناجحة
-                        </a>
-                    </li>
-                @endif
             @endif
         @endif
     </ul>
@@ -257,7 +257,9 @@
                 </div>
                 <ul class="list-footer">
                     <li><a href="{{route('about')}}">من نحن ؟</a></li>
-                    <li><a href="/user/register">دخول / تسجيل</a></li>
+                    @if(!auth()->user())
+                        <li><a href="/user/register">دخول / تسجيل</a></li>
+                    @endif
                     <li><a href="/user/search">البحث المتقدم</a></li>
                     <li><a href="/user/stories">قصص ناجحة</a></li>
                     <li><a href="{{route('article')}}">المقالات</a></li>
@@ -366,7 +368,25 @@
         </div>
     </div>
 </div>
+<script>
+    const body = document.querySelector("html"),
+        toggle = document.querySelector(".toggleTheme");
+    let getMode = localStorage.getItem("mode");
 
+    if (getMode && getMode === "dark") {
+        body.classList.add("dark");
+        toggle.classList.add("active");
+    }
+
+    toggle.addEventListener("click", () => {
+        body.classList.toggle("dark");
+        if (!body.classList.contains("dark")) {
+            return localStorage.setItem("mode", "light");
+        }
+        localStorage.setItem("mode", "dark");
+    });
+    toggle.addEventListener("click", () => toggle.classList.toggle("active"));
+</script>
 <script src="{{ asset('css/bootstrap-4.6.1-dist/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('css/bootstrap-4.6.1-dist/js/popper.min.js') }}"></script>
 <script src="{{ asset('css/bootstrap-4.6.1-dist/js/bootstrap.min.js') }}"></script>

@@ -41,10 +41,6 @@
                 </p>
             </div>
             <!-- <hr class="my-4" /> -->
-            <br />
-            <a class="btn global-btn-1 btn-md" href="/user/register" role="button"
-            >انشاء حساب الان</a
-            >
         </div>
         <p class="becare-ofurself"><q>نتمنى لك التوفيق في إيجاد شريك حياتك</q></p>
     </div>
